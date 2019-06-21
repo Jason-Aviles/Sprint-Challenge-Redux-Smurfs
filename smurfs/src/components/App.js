@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SmurfListview from '../view/SmurfListview'
+import {BrowserRouter, Route,Link} from 'react-router-dom'
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -11,7 +12,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-    <SmurfListview/>
+      <BrowserRouter>
+      <nav>
+<Link to='/'>HOME</Link>
+
+      </nav>
+<Route exact path='/' component={SmurfListview}  />
+    
+    
+    </BrowserRouter>
       </div>
     );
   }

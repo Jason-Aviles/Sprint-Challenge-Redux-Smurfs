@@ -33,12 +33,31 @@ export const DELETE_SMURF_FAILED = " DELETE_SMURF_FAILED";
 export const deleteSmurfs = id => dispatch => {
   dispatch({ type: DELETE_SMURF });
   axiosWithAuth()
-    .delete(`/smurfs${id}`)
+    .delete(`/smurfs/${id}`)
     .then(res => dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data }))
     .catch(err => {
       dispatch({ type: DELETE_SMURF_FAILED, payload: err.data });
     });
 };
+
+
+
+
+
+export const EDIT_SMURF = " EDIT_SMURF";
+export const EDIT_SMURF_SUCCESS = " EDIT_SMURF_SUCCESS";
+export const EDIT_SMURF_FAILED = " EDIT_SMURF_FAILED";
+export const editSmurfs = id => dispatch => {
+  dispatch({ type: EDIT_SMURF });
+  axiosWithAuth()
+    .put(`/smurfs/${id}`)
+    .then(res => dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data }))
+    .catch(err => {
+      dispatch({ type: EDIT_SMURF_FAILED, payload: err.data });
+    });
+};
+
+
 
 /*
   For this project you'll need at least 2 action creators for the main portion,

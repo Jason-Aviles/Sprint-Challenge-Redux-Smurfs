@@ -1,7 +1,7 @@
 import React from 'react';
 import DeleteButton from './DeleteButton '
-import EditSmurf from '../components/EditSmurfs'
-import {Route ,Link}  from 'react-router-dom'
+
+import { Link}  from 'react-router-dom'
 const SmurfItem = (props) => {
   const {name,age,height,id}=props.smurf
   console.log(props)
@@ -13,7 +13,7 @@ const SmurfItem = (props) => {
            <p>{id}</p>
            <DeleteButton smurfIds={id}/>
            <Link to={`/smurfs/${id}`}>Edit</Link>
-           <Route path='/smurfs/:id ' render={()=> <EditSmurf {...props} smurfs={props.smurf}/>} />
+           
            
         </div>
     );

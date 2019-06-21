@@ -6,7 +6,7 @@ const DeleteButton = props => {
   return (
     <div>
       <button
-        onClick={() => props.deleteSmurfs(props.smurfIds)}
+        onClick={() => props.deleteSmurfs(props.smurfIds) }
       >
         Delete
       </button>

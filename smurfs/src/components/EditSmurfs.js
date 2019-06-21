@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {editSmurfs} from '../actions'
+import {editSmurfs,getSmurf} from '../actions'
 
 class EditSmurf extends Component {
     state={
@@ -11,19 +11,9 @@ class EditSmurf extends Component {
 
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps !== this.props) {
-          const editSmurf = this.props.smurfs.filter(
-            smurf => smurf.id === this.props.match.params.id
-          );
-          console.log(editSmurf);
-          this.setState({
-            name: editSmurf.name,
-            age: editSmurf.age,
-            height: editSmurf.height
-          });
-        }
-      }
+   componentDidMount(){
+       this.props.getSmurf()
+   }
     
 
 onInputChange=(e)=>{
@@ -33,18 +23,19 @@ this.setState({[e.currentTarget.name]:e.currentTarget.value})
 
 onSubmitHandle=(e)=>[
     e.preventDefault(),
-    this.props.editSmurfs(this.state)
+    this.props.editSmurfs(this.props.smurfIds)
 
 ]
 
     render() {
-        console.log(this.props)
+        const id = this.props.smurf.map(smurf => smurf.id)
+        
         return (
             <div>
                 <form onSubmit={this.onSubmitHandle}>
-                     <input onChange={this.onInputChange}  name='name' value={this.state.name}/>
-                     <input onChange={this.onInputChange}  name='age' value={this.state.age}/>
-                     <input onChange={this.onInputChange}  name='height' value={this.state.height}/>
+                  edit name:   <input onChange={this.onInputChange}  name='name' value={this.state.name}/>
+                   edit age:  <input onChange={this.onInputChange}  name='age' value={this.state.age}/>
+                    edit height: <input onChange={this.onInputChange}  name='height' value={this.state.height}/>
 
 
                     <button>Edit</button>
@@ -54,4 +45,11 @@ onSubmitHandle=(e)=>[
     }
 }
 
-export default connect(null,{editSmurfs})(EditSmurf);
+const mapStateToProps = (state) =>{
+   
+    return{smurf:state.smurfs}
+}
+
+
+
+export default connect(mapStateToProps,{editSmurfs,getSmurf})(EditSmurf);

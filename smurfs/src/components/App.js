@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import SmurfListview from '../view/SmurfListview'
 import {BrowserRouter, Route,Link} from 'react-router-dom'
+
+import EditSmurf from './EditSmurfs'
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -17,8 +19,8 @@ class App extends Component {
 <Link to='/'>HOME</Link>
 
       </nav>
-<Route exact path='/' component={SmurfListview}  />
-    
+<Route exact path='/'  render={(props)=>   <SmurfListview {...props}  />}  />
+<Route exact path={`/smurfs/:id`} render={(props)=> <EditSmurf {...props} />} />
     
     </BrowserRouter>
       </div>

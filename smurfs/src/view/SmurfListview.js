@@ -3,18 +3,24 @@ import {connect} from 'react-redux'
 import {getSmurf} from '../actions'
 import SmurfItem from '../components/SmurfItem'
 import AddSmurf from '../components/AddSmurf'
+
+
+
 class SmurfListview extends Component {
     componentDidMount(){
         this.props.getSmurf()
     }
     render() {
-        console.log(this.props.smurfs)
+        console.log(this.props)
         return (
             <div>
                 {this.props.smurfs.map(
-                   ( smurf,i) => <SmurfItem key={i} smurf={smurf}/>
+
+                    
+                   ( smurf,i) => <SmurfItem key={i} smurf={smurf}   history={this.props}/>
                 )}
                 <AddSmurf/>
+                 
             </div>
         );
     }

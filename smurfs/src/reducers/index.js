@@ -4,7 +4,13 @@ import {
   GET_SMURF_SUCCESS,
   ADD_SMURF,
   ADD_SMURF_SUCCESS,
-  ADD_SMURF_ERROR
+  ADD_SMURF_ERROR,
+  DELETE_SMURF,
+  DELETE_SMURF_SUCCESS,
+  DELETE_SMURF_FAILED,
+  EDIT_SMURF,
+  EDIT_SMURF_FAILED,
+  EDIT_SMURF_SUCCESS
 } from "../actions";
 /*
   Be sure to import in all of the action types from `../actions`
@@ -41,9 +47,9 @@ const reducer = (state = initialState, action) => {
         fetchingSmurfs: false,
         error: action.payload
       };
-        //get smurfs end
+    //get smurfs end
 
-        //add smurfs start
+    //add smurfs start
     case ADD_SMURF:
       return {
         ...state,
@@ -64,10 +70,39 @@ const reducer = (state = initialState, action) => {
         addingSmurf: false,
         error: action.payload
       };
-//add smurfs end
+    //add smurfs end
 
-// delete smurfs start
+    // delete smurfs start
+    case DELETE_SMURF:
+      return {
+        ...state,
+        deletingSmurf: true,
+        error: ""
+      };
+    case DELETE_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: state.smurfs.filter(smurf => smurf.id !== action.payload),
+        deletingSmurf: false
+      };
+    case DELETE_SMURF_FAILED:
+      return { deletingSmurf: false, error: action.payload };
 
+      case EDIT_SMURF:
+      return {
+        ...state,
+        updatingSmurf: true,
+        error: ""
+      };
+    case EDIT_SMURF_SUCCESS:
+      const UpdateSmurf = state.smurfs.filter(smurf => smurf.id !== action.payload);
+      return {
+        ...state,
+        smurfs: [...UpdateSmurf,action.payload],
+        updatingSmurf: false
+      };
+    case EDIT_SMURF_FAILED:
+      return { updatingSmurf: false, error: action.payload };
     default:
       return state;
   }
